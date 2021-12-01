@@ -25,7 +25,7 @@ BANNER = r"""
 ****************************************************************
 """
 
-VERSION = "2.3.0"
+VERSION = "2.4.0"
 
 # ############### server config ###############
 HOST = "0.0.0.0"
@@ -45,13 +45,12 @@ TABLE_NAME = 'use_proxy'
 
 # ###### config the proxy fetch function ######
 PROXY_FETCHER = [
-    "freeProxy23",
     "freeProxy01",
-#     "freeProxy02", # Not working.
-#     "freeProxy03",
-    # "freeProxy04",
-#     "freeProxy05",
-#     "freeProxy06", # Not working.
+    "freeProxy02",
+    "freeProxy03",
+    "freeProxy04",
+    "freeProxy05",
+    "freeProxy06",
     "freeProxy07",
 #     "freeProxy08", # Not working.
     "freeProxy09",
@@ -68,6 +67,8 @@ PROXY_FETCHER = [
     "freeProxy20",
     "freeProxy21",
     "freeProxy22",
+    "freeProxy23",
+    "freeProxy24",
 ]
 
 # ############# proxy validator #################
@@ -91,8 +92,8 @@ POOL_SIZE_MIN = 10000
 # ############# scheduler config #################
 
 # Set the timezone for the scheduler forcely (optional)
-# If it is running on a VM, and 
-#   "ValueError: Timezone offset does not match system offset" 
+# If it is running on a VM, and
+#   "ValueError: Timezone offset does not match system offset"
 #   was raised during scheduling.
 # Please uncomment the following line and set a timezone for the scheduler.
 # Otherwise it will detect the timezone from the system automatically.
