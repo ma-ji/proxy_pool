@@ -148,19 +148,6 @@ class ProxyFetcher(object):
 
     @staticmethod
     def freeProxy10():
-<<<<<<< HEAD
-        """
-        墙外网站 cn-proxy
-        :return:
-        """
-        urls = ['http://cn-proxy.com/', 'http://cn-proxy.com/archives/218']
-        request = WebRequest()
-        for url in urls:
-            r = request.get(url, timeout=10)
-            proxies = re.findall(r'<td>(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})</td>[\w\W]<td>(\d+)</td>', r.text)
-            for proxy in proxies:
-                yield ':'.join(proxy)
-=======
         """ 89免费代理 """
         r = WebRequest().get("https://www.89ip.cn/index_1.html", timeout=10)
         proxies = re.findall(
@@ -168,44 +155,6 @@ class ProxyFetcher(object):
             r.text)
         for proxy in proxies:
             yield ':'.join(proxy)
-
-    # @staticmethod
-    # def wallProxy01():
-    #     """
-    #     PzzQz https://pzzqz.com/
-    #     """
-    #     from requests import Session
-    #     from lxml import etree
-    #     session = Session()
-    #     try:
-    #         index_resp = session.get("https://pzzqz.com/", timeout=20, verify=False).text
-    #         x_csrf_token = re.findall('X-CSRFToken": "(.*?)"', index_resp)
-    #         if x_csrf_token:
-    #             data = {"http": "on", "ping": "3000", "country": "cn", "ports": ""}
-    #             proxy_resp = session.post("https://pzzqz.com/", verify=False,
-    #                                       headers={"X-CSRFToken": x_csrf_token[0]}, json=data).json()
-    #             tree = etree.HTML(proxy_resp["proxy_html"])
-    #             for tr in tree.xpath("//tr"):
-    #                 ip = "".join(tr.xpath("./td[1]/text()"))
-    #                 port = "".join(tr.xpath("./td[2]/text()"))
-    #                 yield "%s:%s" % (ip, port)
-    #     except Exception as e:
-    #         print(e)
-
-    # @staticmethod
-    # def freeProxy10():
-    #     """
-    #     墙外网站 cn-proxy
-    #     :return:
-    #     """
-    #     urls = ['http://cn-proxy.com/', 'http://cn-proxy.com/archives/218']
-    #     request = WebRequest()
-    #     for url in urls:
-    #         r = request.get(url, timeout=10)
-    #         proxies = re.findall(r'<td>(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})</td>[\w\W]<td>(\d+)</td>', r.text)
-    #         for proxy in proxies:
-    #             yield ':'.join(proxy)
->>>>>>> dd0156b05fc41bed7c2cd4189493effada6c98b9
 
     @staticmethod
     def freeProxy11():
@@ -232,7 +181,6 @@ class ProxyFetcher(object):
             for proxy in proxies:
                 yield ':'.join(proxy)
 
-<<<<<<< HEAD
     @staticmethod
     def freeProxy13(max_page=2):
         """
@@ -374,8 +322,6 @@ class ProxyFetcher(object):
         for proxy in set(proxy_list):
             yield proxy
         # 确保每个proxy都是 host:ip正确的格式返回
-=======
->>>>>>> dd0156b05fc41bed7c2cd4189493effada6c98b9
 
 if __name__ == '__main__':
     p = ProxyFetcher()
