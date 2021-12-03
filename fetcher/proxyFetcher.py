@@ -17,8 +17,12 @@ import requests
 from time import sleep
 from datetime import date, timedelta
 import pandas as pd
-
 from util.webRequest import WebRequest
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+options = Options()
+options.headless = True
+driver = webdriver.Firefox(executable_path='/root/webdrivers/geckodriver', options=options)
 
 
 class ProxyFetcher(object):
@@ -198,20 +202,6 @@ class ProxyFetcher(object):
                 r.text)
             for proxy in proxies:
                 yield ':'.join(proxy)
-
-    @staticmethod
-    def freeProxy14():
-        """
-        http://www.xiladaili.com/
-        西拉代理
-        :return:
-        """
-        urls = ['http://www.xiladaili.com/']
-        for url in urls:
-            r = WebRequest().get(url, timeout=10)
-            ips = re.findall(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{1,5}", r.text)
-            for ip in ips:
-                yield ip.strip()
                 
     @staticmethod
     def freeProxy14():
@@ -316,12 +306,28 @@ class ProxyFetcher(object):
             yield proxy
         # 确保每个proxy都是 host:ip正确的格式返回
         
+    # @staticmethod
+    # def freeProxy23():  # 命名不和已有重复即可
+    #     proxy_list=requests.get('https://raw.githubusercontent.com/ma-ji/proxy_pool/master/fetcher/slow_rotate.txt').text.split()
+    #     for proxy in set(proxy_list):
+    #         yield proxy
+    #     # 确保每个proxy都是 host:ip正确的格式返回
+    
     @staticmethod
-    def freeProxy23():  # 命名不和已有重复即可
-        proxy_list=requests.get('https://raw.githubusercontent.com/ma-ji/proxy_pool/master/fetcher/slow_rotate.txt').text.split()
+    def freeProxy24():  # 命名不和已有重复即可
+        driver.get('https://spys.one/en/http-proxy-list/')
+        # Need to click twice, don't know why.
+        driver.find_element_by_xpath('/html/body/table[2]/tbody/tr[4]/td/table/tbody/tr[1]/td[2]/font/select[1]/option[6]').click()
+        driver.find_element_by_xpath('/html/body/table[2]/tbody/tr[4]/td/table/tbody/tr[1]/td[2]/font/select[1]/option[6]').click()
+        df_tb=pd.read_html(driver.page_source)[2]
+        proxy_list=[]
+        for string in df_tb[0]:
+            re_result=re.findall(r'(^(?:[0-9]{1,3}\.){3}[0-9]{1,3}).+(:\d.+)', str(string))
+            if len(re_result)==1 and len(re_result[0])==2:
+                proxy_list+=[''.join(re_result[0])]
         for proxy in set(proxy_list):
             yield proxy
-        # 确保每个proxy都是 host:ip正确的格式返回
+        # 确保每个proxy都是 ip:port正确的格式返回
 
 if __name__ == '__main__':
     p = ProxyFetcher()

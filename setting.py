@@ -52,7 +52,7 @@ PROXY_FETCHER = [
     "freeProxy05",
     "freeProxy06",
     "freeProxy07",
-#     "freeProxy08", # Not working.
+    "freeProxy08", # Not working.
     "freeProxy09",
     "freeProxy10",
     "freeProxy11",
@@ -67,13 +67,13 @@ PROXY_FETCHER = [
     "freeProxy20",
     "freeProxy21",
     "freeProxy22",
-    "freeProxy23",
+    # "freeProxy23",
     "freeProxy24",
 ]
 
 # ############# proxy validator #################
 # 代理验证目标网站
-HTTP_URL = "http://httpbin.org"
+HTTP_URL = "http://web.archive.org/web/20201028232110/https://shop.k9sforwarriors.org/products/bumper-sticker-5-x-5"
 
 HTTPS_URL = "https://web.archive.org/web/20201028232110/https://shop.k9sforwarriors.org/products/bumper-sticker-5-x-5"
 
