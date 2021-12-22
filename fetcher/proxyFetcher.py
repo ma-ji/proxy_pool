@@ -247,7 +247,7 @@ class ProxyFetcher(object):
         
     @staticmethod
     def freeProxy18():  # 命名不和已有重复即可
-        json_results=requests.get('https://proxylist.geonode.com/api/proxy-list?limit=4000&page=1&sort_by=lastChecked&sort_type=desc&protocols=https%2Csocks4%2Csocks5').json()
+        json_results=requests.get('https://proxylist.geonode.com/api/proxy-list?limit=4000&page=1&sort_by=lastChecked&sort_type=desc&protocols=https%2Chttp').json()
         ip_list=[s['ip']+':'+s['port'] for s in json_results['data']]
         for proxy in ip_list:
             yield proxy
@@ -273,6 +273,7 @@ class ProxyFetcher(object):
     @staticmethod
     def freeProxy21():  # 命名不和已有重复即可
         proxy_list=requests.get('https://www.proxyscan.io/download?type=https').text.split()
+        proxy_list+=requests.get('https://www.proxyscan.io/download?type=http').text.split()
         proxy_list+=requests.get('https://www.proxyscan.io/download?type=socks4').text.split()
         proxy_list+=requests.get('https://www.proxyscan.io/download?type=socks5').text.split()
         for proxy in set(proxy_list):
